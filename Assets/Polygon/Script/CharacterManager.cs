@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class CharacterManager : MonoBehaviour
     public float walkSpeed = 3.0f;
     public float turnSmoothVelocity;
     public float turnSmoothTime = 1.0f;
-
-    [Header("Mouse Look Setting")]
     public Transform cameraTransform;
 
     
@@ -34,29 +33,16 @@ public class CharacterManager : MonoBehaviour
     {
         HandlingCharacterMovement();
         HandlingCharacterAnimation();
-        HandlingMouseLook();
     }
 
     private void HandlingCharacterMovement()
     {
         Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>();
         Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y).normalized;
+        moveDirection = transform.TransformDirection(moveDirection);
 
-        if (moveDirection.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            Vector3 direction = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            characterController.Move(moveDirection.normalized * currentSpeed * Time.deltaTime);
-        }
+        characterController.Move(moveDirection.normalized * currentSpeed * Time.deltaTime);
         
-    }
-
-    private void HandlingMouseLook()
-    {
-        Vector2 inputLook = inputSystem.Player.Look.ReadValue<Vector2>();
     }
 
     private void HandlingCharacterAnimation()
