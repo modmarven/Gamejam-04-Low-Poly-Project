@@ -23,6 +23,10 @@ public class CharacterManager : MonoBehaviour
         inputSystem = new Movement();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+
+        // Cursor visible
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     
@@ -30,6 +34,7 @@ public class CharacterManager : MonoBehaviour
     {
         HandlingCharacterMovement();
         HandlingCharacterAnimation();
+        HandlingMouseLook();
     }
 
     private void HandlingCharacterMovement()
@@ -41,11 +46,17 @@ public class CharacterManager : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 direction = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
+            characterController.Move(moveDirection.normalized * currentSpeed * Time.deltaTime);
         }
         
+    }
+
+    private void HandlingMouseLook()
+    {
+        Vector2 inputLook = inputSystem.Player.Look.ReadValue<Vector2>();
     }
 
     private void HandlingCharacterAnimation()
