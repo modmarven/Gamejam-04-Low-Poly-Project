@@ -25,9 +25,11 @@ public class MouseLookSetting : MonoBehaviour
     private void HandlingMouseLook()
     {
         Vector2 inputLook = inputSystem.Player.Look.ReadValue<Vector2>();
+        float mouseX = inputLook.x;
+        float mouseY = inputLook.y;
 
-        playerBody.transform.rotation *= Quaternion.AngleAxis(inputLook.x * rotationSpeed * Time.fixedDeltaTime, Vector3.up);
-        playerBody.transform.rotation *= Quaternion.AngleAxis(inputLook.y * rotationSpeed * Time.fixedDeltaTime, Vector3.up);
+        playerBody.transform.rotation *= Quaternion.AngleAxis(mouseX * rotationSpeed * Time.fixedDeltaTime, Vector3.up);
+        playerBody.transform.rotation *= Quaternion.AngleAxis(mouseY * rotationSpeed * Time.fixedDeltaTime, Vector3.right);
 
         var angles = playerBody.transform.localEulerAngles;
         angles.z = 0;
