@@ -129,7 +129,7 @@ public partial class @Movement: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""2bdf35a0-363b-4665-8dd3-e3633360fd10"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -140,7 +140,7 @@ public partial class @Movement: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""a5847cbb-4c39-4655-bd67-f044ea20fe53"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
