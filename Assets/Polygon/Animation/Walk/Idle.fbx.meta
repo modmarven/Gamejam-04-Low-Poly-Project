@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 136c44a3210bfbe42b94edcda0094a2c
+guid: f5eab6cb2dd044b43af9131b74cc1e59
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Left Strafe Walking
+      name: Breathing Idle
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 31
+      lastFrame: 298
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
