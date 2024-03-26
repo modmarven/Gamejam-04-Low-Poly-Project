@@ -17,7 +17,7 @@ public class MouseLookSetting : MonoBehaviour
     }
 
     
-    void FixedUpdate()
+    void Update()
     {
         HandlingMouseLook();
     }
@@ -28,8 +28,8 @@ public class MouseLookSetting : MonoBehaviour
         float mouseX = inputLook.x;
         float mouseY = inputLook.y;
 
-        playerBody.transform.rotation *= Quaternion.AngleAxis(mouseX * rotationSpeed * Time.fixedDeltaTime, Vector3.up);
-        playerBody.transform.rotation *= Quaternion.AngleAxis(mouseY * rotationSpeed * Time.fixedDeltaTime, Vector3.right);
+        playerBody.transform.rotation *= Quaternion.AngleAxis(mouseX * rotationSpeed * Time.deltaTime, Vector3.up);
+        playerBody.transform.rotation *= Quaternion.AngleAxis(mouseY * rotationSpeed * Time.deltaTime, Vector3.right);
 
         var angles = playerBody.transform.localEulerAngles;
         angles.z = 0;

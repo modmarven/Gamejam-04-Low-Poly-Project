@@ -14,7 +14,14 @@ public class CharacterManager : MonoBehaviour
     public float walkSpeed = 3.0f;
     public float turnSmoothVelocity;
     public float turnSmoothTime = 1.0f;
-    public Transform cameraTransform;
+    private Vector3 velocity;
+
+    [Header("Jump Setting")]
+    public float gravity = 9.81f;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    public float groundDistance = 0.4f;
+    public bool isGrounded;
 
     
     void Awake()
@@ -33,6 +40,10 @@ public class CharacterManager : MonoBehaviour
     {
         HandlingCharacterMovement();
         HandlingCharacterAnimation();
+        CharacterApplyGravity();
+
+        //Check if grounded
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundLayer);
     }
 
     private void HandlingCharacterMovement()
@@ -43,6 +54,13 @@ public class CharacterManager : MonoBehaviour
 
         characterController.Move(moveDirection.normalized * currentSpeed * Time.deltaTime);
         
+    }
+
+    private void CharacterApplyGravity()
+    {
+        if (!isGrounded) velocity.y -= gravity * Time.deltaTime;
+        else if (velocity.y < 0) velocity.y = -2f;
+        characterController.Move(velocity * Time.deltaTime);
     }
 
     private void HandlingCharacterAnimation()
