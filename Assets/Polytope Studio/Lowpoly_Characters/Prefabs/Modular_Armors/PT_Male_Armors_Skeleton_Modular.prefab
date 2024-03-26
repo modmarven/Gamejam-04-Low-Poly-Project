@@ -3257,7 +3257,6 @@ GameObject:
   - component: {fileID: 3196280426804442751}
   - component: {fileID: 4650288991098024242}
   - component: {fileID: 7449439899167745612}
-  - component: {fileID: 6771068878386568262}
   - component: {fileID: 4973541165852572968}
   m_Layer: 0
   m_Name: PT_Male_Armors_Skeleton_Modular
@@ -3338,24 +3337,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &6771068878386568262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8210207690257594047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9e012d10c9bd6a4b92be924c08e25bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wayPoint:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  minDistanceWaypoint: 1
 --- !u!195 &4973541165852572968
 NavMeshAgent:
   m_ObjectHideFlags: 0
