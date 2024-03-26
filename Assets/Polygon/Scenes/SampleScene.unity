@@ -16100,9 +16100,17 @@ PrefabInstance:
       value: HumanMale_Character
       objectReference: {fileID: 0}
     - target: {fileID: 7631682375877124259, guid: a4e72e2924dab004b979616ee504b180, type: 3}
+      propertyPath: runSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7631682375877124259, guid: a4e72e2924dab004b979616ee504b180, type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 1409498108}
+    - target: {fileID: 7631682375877124259, guid: a4e72e2924dab004b979616ee504b180, type: 3}
+      propertyPath: runBackSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7631682375877124259, guid: a4e72e2924dab004b979616ee504b180, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 64

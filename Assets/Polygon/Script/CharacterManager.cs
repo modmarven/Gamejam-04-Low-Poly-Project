@@ -10,11 +10,21 @@ public class CharacterManager : MonoBehaviour
     private Animator animator;
 
     [Header("Movement Setting")]
-    public float currentSpeed = 3.0f;
-    public float walkSpeed = 3.0f;
+    [SerializeField] private float currentSpeed;
+    [SerializeField] private float walkSpeed = 3.0f;
+    [SerializeField] private float walkBackSpeed = 2.0f;
+
+    [Space]
     public float turnSmoothVelocity;
     public float turnSmoothTime = 1.0f;
     private Vector3 velocity;
+    [Space]
+    [SerializeField] private float runSpeed = 5.0f;
+    [SerializeField] private float runBackSpeed = 4.0f;
+
+    public bool isWalk;
+    public bool isSprint;
+
 
     [Header("Jump Setting")]
     public float gravity = 9.81f;
@@ -29,6 +39,7 @@ public class CharacterManager : MonoBehaviour
         inputSystem = new Movement();
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        currentSpeed = walkSpeed;
 
         // Cursor visible
         Cursor.lockState = CursorLockMode.Locked;
@@ -41,6 +52,7 @@ public class CharacterManager : MonoBehaviour
         HandlingCharacterMovement();
         HandlingCharacterAnimation();
         CharacterApplyGravity();
+        HandlingCharacterSprint();
 
         //Check if grounded
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundLayer);
@@ -56,6 +68,25 @@ public class CharacterManager : MonoBehaviour
         
     }
 
+    private void HandlingCharacterSprint()
+    {
+        // get movement input
+        Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>();
+
+        // Set sprint bool
+        if (inputSystem.Player.Sprint.triggered) isSprint = !isSprint;
+        if (!isSprint) isWalk = true;
+        else isWalk = false;
+
+        if (inputVector == Vector2.zero) isSprint = false;
+
+        // Handle the speed
+        if (isSprint && inputVector.y > 0.0f) currentSpeed = runSpeed;
+        else if (isSprint && inputVector.y < 0.0f) currentSpeed = runBackSpeed;
+        if (isWalk && inputVector.y > 0.0f) currentSpeed = walkSpeed;
+        else if (isWalk && inputVector.y < 0.0f) currentSpeed = walkBackSpeed;
+    }
+
     private void CharacterApplyGravity()
     {
         if (!isGrounded) velocity.y -= gravity * Time.deltaTime;
@@ -66,6 +97,9 @@ public class CharacterManager : MonoBehaviour
     private void HandlingCharacterAnimation()
     {
         Vector2 inputVector = inputSystem.Player.Move.ReadValue<Vector2>();
+        if (isSprint) animator.SetBool("isRun", true);
+        else animator.SetBool("isRun", false);
+
         animator.SetFloat("xMove", inputVector.x);
         animator.SetFloat("yMove", inputVector.y);
     }
