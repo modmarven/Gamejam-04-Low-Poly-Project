@@ -16,7 +16,7 @@ public class WalkState : StateMachineBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = animator.GetComponent<NavMeshAgent>();
-        agent.speed = 1.5f;
+        agent.speed = 2f;
         timer = 0;
         GameObject go = GameObject.FindGameObjectWithTag("WayPoint");
         foreach (Transform t in go.transform)
@@ -32,7 +32,7 @@ public class WalkState : StateMachineBehaviour
             agent.SetDestination(wayPoint[Random.Range(0, wayPoint.Count)].position);
 
         timer += Time.deltaTime;
-        if (timer > 20) animator.SetBool("isWalk", false);
+        if (timer > 10) animator.SetBool("isWalk", false);
 
         float distance = Vector3.Distance(player.position, animator.transform.position);
         if (distance < chaseRange) animator.SetBool("isRun", true);

@@ -19,7 +19,7 @@ public class IdleState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer += Time.deltaTime;
-        if (timer > 10) animator.SetBool("isWalk", true);
+        if (timer > 5) animator.SetBool("isWalk", true);
 
         float distance = Vector3.Distance(player.position, animator.transform.position);
         if (distance < chaseRange) animator.SetBool("isRun", true);
